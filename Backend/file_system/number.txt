@@ -1,6 +1,0 @@
-Alice 2000
-John 4000
-Ryan 8000
-Ryan 3000
-Ryan 9000
-Ryan 10000

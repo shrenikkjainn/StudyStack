@@ -1,18 +1,29 @@
-const path = require('path');
-const http = require('http');
+require('dotenv').config();
 
+const app = require('./app');
+const connectDB = require('./config/db');
 
+// Added handlers for uncaught exceptions and unhandled rejections to prevent server crashes
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
 
-const server = http.createServer((req, res)=>{
-  // req
-  console.log(`Method: ${req.method}`);
-  console.log(`Method: ${req.url}`);
-  
-  // res
-  res.end(JSON.stringify("Hello From Node.js"))
-})
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
-let PORT = 3000;
-server.listen(PORT, ()=>{
-  console.log("Server is live on 3000")
-})
+const PORT = process.env.PORT || 5000;
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Express server is live on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server', error.message);
+    process.exit(1);
+  }
+};
+
+startServer();

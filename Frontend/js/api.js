@@ -2,7 +2,7 @@
 
 // The base URL of the deployed backend.
 // Change this if you deploy to a different URL or want to test locally (e.g., http://localhost:5000/api)
-const API_BASE_URL = 'https://studystack-4nix.onrender.com';
+const API_BASE_URL = 'https://studystack-backend-lsqw.onrender.com';
 
 // Helper to get auth token
 const getToken = () => localStorage.getItem('studyStack_token');
